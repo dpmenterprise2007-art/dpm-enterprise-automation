@@ -1,0 +1,1 @@
+export async function onRequest(){return Response.json({ok:true,service:"DPM Enterprise Automation",version:"0.1.0",time:new Date().toISOString()});}
