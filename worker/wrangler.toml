@@ -1,0 +1,14 @@
+name = "dpm-enterprise-lead-hunter"
+main = "index.js"
+compatibility_date = "2026-11-22"
+
+[triggers]
+crons = ["0 3 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dpm-leads"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+# Set TAVILY_API_KEY as a Worker secret, not here.
