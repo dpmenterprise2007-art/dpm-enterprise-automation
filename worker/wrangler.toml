@@ -8,7 +8,7 @@ crons = ["0 3 * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "dpm-leads"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "ccb17f65-fa44-4e0d-a272-0cae7f62023d"
 
 [vars]
 # Set TAVILY_API_KEY as a Worker secret, not here.
