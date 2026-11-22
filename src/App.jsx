@@ -26,6 +26,7 @@ function AppShell(){const [expanded,setExpanded]=useState({"Overview":true,"Sale
 const active=allPages.find(p=>p.path===location.pathname)||allPages[0];
 const results=useMemo(()=>allPages.filter(p=>(p.label+" "+p.group).toLowerCase().includes(query.toLowerCase())).slice(0,12),[query]);
 function toggle(g){setExpanded(e=>({...e,[g]:!e[g]}))}
+if(location.pathname==="/") return <HomeIndex navigate={navigate}/>;
 return <div className="erp-shell">
 <aside className={"sidebar "+(mobile?"mobile-open":"")}><div className="brand"><div className="brand-logo">DPM</div><div><strong>DPM NEXUS</strong><small>Enterprise ERP · v1.0</small></div></div>
 <div className="workspace-switch"><Building2 size={16}/><span>DPM Enterprise Pvt. Ltd.</span><ChevronDown size={14}/></div>
