@@ -1,23 +1,30 @@
 # DPM Enterprise Automation
 
-A Cloudflare Pages + React lead-discovery and CRM starter for DPM Enterprise Private Limited.
+Cloudflare Pages + React lead-discovery and CRM for DPM Enterprise Private Limited.
 
-## Current MVP
-- React dashboard and lead pipeline
-- Manual lead capture
-- Pipeline stages: New → Verified → Contact Ready → Contacted → Follow-up → Won / Closed
-- Public-source project hunting using Tavily search API
-- D1 persistence when configured
-- Approval-first approach: no automatic bulk email or calling
+## Built so far
+- React dashboard, lead pipeline, manual lead capture and stage controls
+- Live public-source project search using Tavily
+- Candidate search results saved into D1 (when D1 is configured)
+- Scheduled daily public-source lead hunt worker (separate Cloudflare Worker)
+- URL deduplication, lead scoring, build workflow
+- Approval-first outreach: no unattended email/calling
 
-## Deploy
+## Pages deployment
 1. Connect this repository to Cloudflare Pages.
-2. Build command: `npm run build`; output: `dist`.
-3. Create a Cloudflare D1 database named `dpm-leads`.
+2. Build command: `npm run build`; output directory: `dist`.
+3. Create Cloudflare D1 database `dpm-leads`.
 4. Run `db/schema.sql` in D1 Console.
-5. Add Pages binding `DB` to the D1 database.
-6. Set environment variable `TAVILY_API_KEY` for live public search.
+5. Add Pages D1 binding named `DB`.
+6. Add Pages environment variable `TAVILY_API_KEY`.
 7. Deploy.
+
+## Scheduled hunter deployment
+The scheduled search is a separate Worker under `worker/`.
+1. Create a Worker and deploy using `worker/index.js` and `worker/wrangler.toml` (or run Wrangler from the worker folder).
+2. Set Worker secret `TAVILY_API_KEY`.
+3. Set the D1 database binding `DB` to the same `dpm-leads` database and replace the placeholder database ID.
+4. Cron is set to daily at 03:00 UTC (08:30 India time).
 
 ## API
 - `GET /api/health`
@@ -26,12 +33,12 @@ A Cloudflare Pages + React lead-discovery and CRM starter for DPM Enterprise Pri
 - `PATCH /api/leads/:id`
 - `POST /api/hunt`
 
-## Roadmap
-1. Scheduled public-source searches and query rotation.
-2. Deduplication, buyer matching, and lead verification.
-3. Outreach draft queue with human approval.
-4. Email integration after approval.
-5. Click-to-call / call task creation, not unattended cold calling.
-6. Daily digest, follow-up reminders, and audit history.
+## Next phases
+- Better entity deduplication and buyer verification checklist
+- Public procurement source-specific monitors (GeM, eProcure, rail/coal/PSU, private projects)
+- Outreach draft queue with approval
+- Approved email integration
+- Call task / click-to-call with consent and human control
+- Daily digest and follow-up reminders
 
-Never commit API keys. Search results are candidate leads and must be independently verified before outreach.
+Never commit credentials. Search results are leads to verify—not confirmed buyers, live tenders, or permission to contact.
