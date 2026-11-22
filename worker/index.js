@@ -14,11 +14,11 @@ export default {
   for(const result of data.results||[]){
    if(!result.url)continue;
    const score=Math.max(25,Math.min(85,50+Math.round((result.score||0)*30)));
-   const title=(result.title||"Public project signal").slice(0,240);
+   const company=(result.title||"Public project signal").slice(0,240);
    const notes=(result.content||"").slice(0,900);
    try{
     await env.DB.prepare("INSERT OR IGNORE INTO leads (id,company,title,location,source,stage,score,email,phone,url,notes) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
-     .bind(crypto.randomUUID(),title,"Public web project signal","Location pending verification","Scheduled Tavily public search","New",score,"","","",result.url,notes).run();
+     .bind(crypto.randomUUID(),company,"Public web project signal","Location pending verification","Scheduled Tavily public search","New",score,"","",result.url,notes).run();
    }catch(err){console.error("Lead insert error",err);}
   }
   console.log("Scheduled hunt completed",query,"results:",data.results?.length||0);
