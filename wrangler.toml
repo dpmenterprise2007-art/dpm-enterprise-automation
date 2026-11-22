@@ -1,9 +1,0 @@
-name = "dpm-enterprise-automation"
-compatibility_date = "2026-11-22"
-pages_build_output_dir = "dist"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "dpm-leads"
-database_id = "ccb17f65-fa44-4e0d-a272-0cae7f62023d"
-migrations_dir = "db"
