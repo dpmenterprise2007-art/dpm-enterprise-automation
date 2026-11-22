@@ -1,44 +1,65 @@
-# DPM Nexus ERP
+# DPM Enterprise + DPM Nexus — Unified Platform
 
-DPM Enterprise Private Limited's modular ERP workspace, deployed through Cloudflare Pages.
+A unified digital platform for **DPM Enterprise Private Limited**. The public-facing company website and internal Nexus ERP live in one React application and share brand/navigation.
 
-## ERP shell currently committed
-- Responsive ERP dashboard and sidebar module navigation
-- **150 route/page catalog** organized into 15 groups: Overview, Sales CRM, Projects, Interior Design, BOQ & Estimation, Procurement, Inventory, Manufacturing, Marketplace, Finance, HR & Team, Field Operations, AI Studio, Automation & Integrations, System
-- Global route search
-- Quick launch shortcuts
-- Module template with Overview/Records/Activity/Settings tabs
-- AI-ready module layout
-- Marketplace and Updater/Release pages in the route catalog
-- React + Vite + React Router
+## Current implementation (frontend foundation)
+- Premium public company homepage with service sections, contact CTA, and Nexus entry links.
+- DPM Nexus ERP responsive shell with 15 business module groups and 150 catalog routes.
+- Search across module/page routes.
+- Workspace dashboard with quick links and status indicators.
+- Generic record workspace for module pages: create, search and delete records.
+- Browser-local persistence for prototype records (localStorage).
+- Responsive sidebar, mobile layout, and shared design system.
 
-## Important status
-This commit is the **ERP front-end foundation / route shell**, not a completed production ERP. Many modules are page templates and are not yet backed by database workflows. AI actions, marketplace checkout/vendor sync, and safe automatic updates need service integrations and backend implementation. Do not treat the UI placeholders as operational features.
+> **Prototype boundary:** Current saved records are local to the browser. This is not yet a multi-user production database. Auth, shared server-side persistence, permissions, real integrations, and AI provider credentials must be configured and implemented before production operational use.
 
-## Build
-- Install: `npm install`
-- Development: `npm run dev`
-- Production build: `npm run build`
-- Preview: `npm run preview`
-- Cloudflare Pages build command: `npm run build`
-- Cloudflare Pages output: `dist`
+## Public website sections
+- Brand / interior / turnkey / furniture manufacturing
+- Services: residential, corporate, commercial, institutional, kitchens, custom furniture
+- Company overview and project process
+- Project discovery CTA and enquiry contact links
+- Direct phone, email and WhatsApp links
 
-## Existing lead automation API
-The earlier lead-hunting API and scheduled worker remain in the repo:
-- `POST /api/hunt` (requires `TAVILY_API_KEY`)
+## Nexus modules (150 route catalog)
+Overview, Sales CRM, Projects, Interior Design, BOQ & Estimation, Procurement, Inventory, Manufacturing, Marketplace, Finance, HR & Team, Field Operations, AI Studio, Automation & Integrations, System.
+
+## Technology
+- React 18 + Vite
+- React Router 6
+- Lucide React icons
+- Cloudflare Pages static frontend
+
+## Local development
+```bash
+npm install
+npm run dev
+```
+
+## Production build
+```bash
+npm run build
+npm run preview
+```
+Cloudflare Pages: build command `npm run build`; output directory `dist`.
+
+## Backend roadmap
+1. Auth and tenant/company roles.
+2. Shared database schema and migrations (Cloudflare D1 or Supabase; select and configure).
+3. API validation, rate limiting and audit trail.
+4. CRM, leads, contacts, quotes, project, BOQ and procurement workflows.
+5. Finance, inventory, manufacturing, HR and field modules.
+6. AI gateway with scoped tools, model routing, secrets, budgets and audit.
+7. Marketplace vendors, catalog, RFQs and order lifecycle.
+8. Email/WhatsApp integrations, automations, scheduler and webhooks.
+9. Signed updater, version compatibility, backups, health checks and rollback.
+10. Unit/integration/E2E tests, monitoring, security and release checks.
+
+## Existing API notes
+Earlier lead automation endpoints exist in the repository. Verify their current implementation and required Cloudflare bindings/secrets before relying on them:
+- `POST /api/hunt`
 - `GET /api/leads`
 - `POST /api/leads`
 - `PATCH /api/leads/:id`
 - `GET /api/health`
 
-## Planned production rollout
-1. Authentication, organizations, role-based access control and tenant separation.
-2. Shared database schema and migration framework.
-3. CRM, projects, BOQ, procurement, inventory, production, finance, HR and field workflows.
-4. AI gateway with model routing, tool permissions, audit trail and budget limits.
-5. Marketplace vendor onboarding, product catalog, RFQs and purchase/order workflows.
-6. Updater: signed release manifest, compatibility checks, backup, staged rollout, health checks, rollback. No unattended destructive updates.
-7. Tests, monitoring, backup/recovery and security review.
-
-## Credentials
-Keep API keys and secrets in Cloudflare environment variables/secrets, never commit them to Git.
+Never commit secrets or API keys.
