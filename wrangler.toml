@@ -5,5 +5,5 @@ pages_build_output_dir = "dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "dpm-leads"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "ccb17f65-fa44-4e0d-a272-0cae7f62023d"
 migrations_dir = "db"
