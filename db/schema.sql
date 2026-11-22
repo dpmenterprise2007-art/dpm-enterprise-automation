@@ -15,3 +15,4 @@ CREATE TABLE IF NOT EXISTS leads (
 );
 CREATE INDEX IF NOT EXISTS leads_stage_idx ON leads(stage);
 CREATE INDEX IF NOT EXISTS leads_created_idx ON leads(created_at);
+CREATE UNIQUE INDEX IF NOT EXISTS leads_unique_url_idx ON leads(url) WHERE url <> '';
