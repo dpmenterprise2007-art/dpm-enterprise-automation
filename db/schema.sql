@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS leads (
-  id TEXT PRIMARY PRIMARY KEY,
+  id TEXT PRIMARY KEY,
   company TEXT NOT NULL,
   title TEXT DEFAULT '',
   location TEXT DEFAULT '',
